@@ -4,12 +4,14 @@ import { upload } from "../middleware/upload.js";
 import { DocumentChunkerService } from "../services/document.chunker.js";
 import { DocumentLoaderService } from "../services/document.loader.js";
 import { IngestionService } from "../services/ingestion.service.js";
+import { DocumentIndexerService } from "../services/document.indexer.js";
 
 const router = Router();
 
 const ingestionService = new IngestionService(
   new DocumentLoaderService(),
   new DocumentChunkerService(),
+  new DocumentIndexerService()
 );
 
 router.post("/", upload.single("file"), async (req, res, next) => {
@@ -29,15 +31,7 @@ router.post("/", upload.single("file"), async (req, res, next) => {
       mimeType: req.file.mimetype,
     });
 
-    res.status(201).json({
-      documentId: result.documentId,
-      sourceDocumentCount: result.sourceDocumentCount,
-      chunkCount: result.chunkCount,
-      chunks: result.chunks.map((chunk) => ({
-        content: chunk.pageContent,
-        metadata: chunk.metadata,
-      })),
-    });
+    res.status(201).json(result);
   } catch (error) {
     next(error);
   }
