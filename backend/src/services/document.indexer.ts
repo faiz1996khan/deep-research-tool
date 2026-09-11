@@ -23,13 +23,14 @@ export class DocumentIndexerService {
 
     private async indexInChroma(chunks:Document[],vectors:number[][]):Promise<void> {
         const collection = await getDocumentCollection();
-
-        await collection.add({
+        const data = {
             ids: chunks.map((chunk:Document) => this.getChunkId(chunk)),
             documents: chunks.map((chunk:Document) => chunk.pageContent),
             embeddings: vectors,
             metadatas: chunks.map((chunk:Document) => this.toChromaMetadata(chunk)),
-        })
+        }
+        console.log(`Data=====${JSON.stringify(data)}`)
+        await collection.add(data)
     }
 
     private async indexInElasticsearch(chunks: Document[],vectors: number[][]):Promise<void> {
@@ -56,7 +57,7 @@ export class DocumentIndexerService {
                     mimeType: this.getStringMetadata(chunk, "mimeType"),
                     pageNumber: this.getNumberMetadata(chunk, "pageNumber"),
                     sheetName: this.getStringMetadata(chunk, "sheetName"),
-                    embedding: vector,
+                    embedding: vectors,
                     createdAt: new Date().toISOString(),
                 },
             ];
