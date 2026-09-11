@@ -11,7 +11,9 @@ export class IngestionService {
     async ingest(input: Omit<LoadDocumentInput,"documentId">):Promise<IngestionResult>{
         const documentId = randomUUID();
         const documents = await this.loader.load({...input,documentId})
+        console.log(`Documents==============${JSON.stringify(documents)}`)
         const chunks = await this.chunker.chunk(documents)
+        console.log(`chunks==============${JSON.stringify(chunks)}`)
         await this.indexer.index(chunks);
         return {
             documentId,

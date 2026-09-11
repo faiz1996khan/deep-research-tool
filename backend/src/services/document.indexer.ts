@@ -16,6 +16,7 @@ export class DocumentIndexerService {
         await ensureDocumentIndex();
         const contents = chunks.map((chunk:Document) => chunk.pageContent);
         const vectors = await embedding.embedDocuments(contents);
+        console.log(`\n\nVectors========${JSON.stringify(vectors)}`)
         await this.indexInChroma(chunks,vectors);
         await this.indexInElasticsearch(chunks,vectors);
     }
