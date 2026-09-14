@@ -16,12 +16,12 @@ export interface HybridRetrievalResult {
 }
 
 export interface LexicalSearchResult {
-  readonly chunk: Document;
-  readonly rank: number;
+  chunk: Document;
+  rank: number;
 }
 
 export interface RankedItem {
-  readonly document: Document;
-  readonly lexicalRank?: number;
-  readonly vectorRank?: number;
+  document: Document;
+  lexicalRank?: number;
+  vectorRank?: number;
 }
