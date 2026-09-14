@@ -19,40 +19,34 @@ export async function ensureDocumentIndex(): Promise<void> {
         id: {
           type: "keyword",
         },
-
+        chunkId: {
+          type: "keyword",
+        },
         documentId: {
           type: "keyword",
         },
-
         content: {
           type: "text",
         },
-
         sourceType: {
           type: "keyword",
         },
-
         fileName: {
           type: "keyword",
         },
-
         mimeType: {
           type: "keyword",
         },
-
         pageNumber: {
           type: "integer",
         },
-
         sheetName: {
           type: "keyword",
         },
-
         embedding: {
           type: "dense_vector",
           dims: Number(config.dimensions)
         },
-
         createdAt: {
           type: "date",
         },

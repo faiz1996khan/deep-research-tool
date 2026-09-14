@@ -50,6 +50,7 @@ export class DocumentIndexerService {
                 },
                 {
                     id: this.getChunkId(chunk),
+                    chunkId: this.getChunkId(chunk),
                     documentId: this.getStringMetadata(chunk, "documentId"),
                     content: chunk.pageContent,
                     sourceType: this.getStringMetadata(chunk, "sourceType"),
@@ -57,7 +58,7 @@ export class DocumentIndexerService {
                     mimeType: this.getStringMetadata(chunk, "mimeType"),
                     pageNumber: this.getNumberMetadata(chunk, "pageNumber"),
                     sheetName: this.getStringMetadata(chunk, "sheetName"),
-                    embedding: vectors,
+                    embedding: vector,
                     createdAt: new Date().toISOString(),
                 },
             ];
