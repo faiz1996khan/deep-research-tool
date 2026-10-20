@@ -25,3 +25,16 @@ export interface RankedItem {
   lexicalRank?: number;
   vectorRank?: number;
 }
+
+export interface AnswerSource {
+  id: string;
+  content: string;
+  metadata: Record<string, unknown>;
+  retrievalScore: number;
+  retrievalMethod: string;
+}
+
+export interface AnswerResult {
+  answer: string;
+  sources: AnswerSource[];
+}

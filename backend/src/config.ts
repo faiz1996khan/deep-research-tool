@@ -17,5 +17,6 @@ export const config = {
     dimensions: getRequiredEnv("DIMENSIONS"),
     elasticsearchUrl: getRequiredEnv("ES_URL"),
     chromaHost: getRequiredEnv("CHROMA_HOST"),
-    chromaPort: getRequiredEnv("CHROMA_PORT")
+    chromaPort: getRequiredEnv("CHROMA_PORT"),
+    generationModel: getRequiredEnv("GEMINI_GENERATION_MODEL")
 }
